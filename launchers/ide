@@ -1,0 +1,42 @@
+#!/data/data/com.termux/files/usr/bin/bash
+set -eu
+# Use Termux libraries rather than libraries inherited from other applications.
+unset LD_LIBRARY_PATH
+state="$HOME/.local/state/tablet-ide"
+mkdir -p "$state"
+url="http://127.0.0.1:8080"
+pidfile="$state/server.pid"
+running() { [[ -f "$pidfile" ]] && kill -0 "$(cat "$pidfile")" 2>/dev/null; }
+case "${1:-start}" in
+ stop)
+  if running; then kill "$(cat "$pidfile")"; rm -f "$pidfile"; echo "IDE stopped."; else echo "IDE is already stopped."; fi
+  exit 0 ;;
+ status)
+  if running; then echo "IDE running: $url"; else echo "IDE stopped."; fi
+  exit 0 ;;
+ start) shift || true ;;
+ -h|--help) echo 'Usage: ide [start [folder]|stop|status]'; exit 0 ;;
+ *) if [[ -d "$1" ]]; then :; else echo 'Usage: ide [start [folder]|stop|status]' >&2; exit 1; fi ;;
+esac
+folder="${1:-$HOME}"
+[[ -d "$folder" ]] || { echo "Folder does not exist: $folder" >&2; exit 1; }
+if ! running; then
+ if curl -s --max-time 2 "$url/healthz" >/dev/null; then
+  echo 'Port 8080 is already in use. Check the existing server.' >&2
+  exit 1
+ fi
+ nohup setsid code-server --config "$HOME/.config/code-server/config.yaml" "$folder" >"$state/server.log" 2>&1 < /dev/null &
+ echo "$!" > "$pidfile"
+fi
+for ((attempt=0; attempt<40; attempt++)); do
+ if curl -fsS --max-time 2 "$url/healthz" >/dev/null 2>&1; then
+  echo "IDE ready: $url"
+  folder_url=$(python -c 'import pathlib,sys,urllib.parse; print(urllib.parse.quote(str(pathlib.Path(sys.argv[1]).resolve()), safe=""))' "$folder")
+  nohup setsid "$HOME/bin/chrome" "$url/?folder=$folder_url" >"$state/browser.log" 2>&1 < /dev/null &
+  exit 0
+ fi
+ if ! running; then echo "IDE failed to start. See $state/server.log" >&2; exit 1; fi
+ sleep 1
+done
+echo "IDE is still starting. See $state/server.log" >&2
+exit 1

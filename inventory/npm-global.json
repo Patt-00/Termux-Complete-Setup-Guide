@@ -1,0 +1,13 @@
+{
+  "name": "lib",
+  "dependencies": {
+    "@mmmbuto/codex-cli-termux": {
+      "version": "0.160.0-termux.2",
+      "overridden": false
+    },
+    "npm": {
+      "version": "11.19.1",
+      "overridden": false
+    }
+  }
+}

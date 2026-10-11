@@ -1,0 +1,7 @@
+deb https://mirror.nevacloud.com/applications/termux/termux-main stable main
+
+deb https://packages-cf.termux.dev/apt/termux-glibc/ glibc stable
+
+deb https://tur.kcubeterm.com tur-packages tur tur-on-device tur-continuous
+
+deb https://mirror.nevacloud.com/applications/termux/termux-x11 x11 main

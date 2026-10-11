@@ -1,0 +1,57 @@
+#!/data/data/com.termux/files/usr/bin/bash
+# Launch Chromium in Termux with the local PulseAudio Android audio sink.
+unset LD_LIBRARY_PATH LD_PRELOAD
+
+export DISPLAY="${DISPLAY:-:0}"
+export XCURSOR_THEME=Adwaita
+export XCURSOR_SIZE=24
+
+# Open the Android companion app first, so the X11 surface is available even
+# after Android has backgrounded it.
+if [ -x "$HOME/bin/rish" ]; then
+  "$HOME/bin/rish" -c 'am start -n com.termux.x11/.MainActivity' >/dev/null 2>&1 || true
+fi
+
+if ! xdpyinfo -display "$DISPLAY" >/dev/null 2>&1; then
+  termux-x11 "$DISPLAY" >/dev/null 2>&1 &
+  for _ in $(seq 1 25); do
+    xdpyinfo -display "$DISPLAY" >/dev/null 2>&1 && break
+    sleep 0.2
+  done
+fi
+
+if ! xdpyinfo -display "$DISPLAY" >/dev/null 2>&1; then
+  echo "Termux:X11 is unavailable. Install and open the Termux:X11 Android companion app, then run: termux-x11 :0" >&2
+  exit 1
+fi
+
+printf 'Xcursor.theme: %s\nXcursor.size: %s\n' "$XCURSOR_THEME" "$XCURSOR_SIZE" | xrdb -display "$DISPLAY" -merge
+
+# Chromium needs a window manager to maximize its window on Termux:X11.
+if ! wmctrl -m >/dev/null 2>&1; then
+  openbox >/dev/null 2>&1 &
+  for _ in $(seq 1 25); do
+    wmctrl -m >/dev/null 2>&1 && break
+    sleep 0.2
+  done
+fi
+
+if ! wmctrl -m >/dev/null 2>&1; then
+  echo "Could not start the X11 window manager needed to maximize Chromium." >&2
+  exit 1
+fi
+
+if ! pulseaudio --check >/dev/null 2>&1; then
+  pulseaudio --start --exit-idle-time=-1 >/dev/null 2>&1 || true
+fi
+
+exec chromium-browser \
+  --no-sandbox \
+  --start-maximized \
+  --window-position=0,0 \
+  --window-size=1707,1139 \
+  --force-device-scale-factor=1.5 \
+  --renderer-process-limit=4 \
+  --disk-cache-size=104857600 \
+  --disable-features=MediaRouter,OptimizationHints,AutofillServerCommunication \
+  "$@"

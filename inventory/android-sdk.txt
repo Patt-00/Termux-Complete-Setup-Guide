@@ -1,0 +1,83 @@
+platform-tools/source.properties
+Pkg.UserSrc=false
+Pkg.Revision=37.0.1
+
+
+cmake/3.22.1/source.properties
+Pkg.Revision = 3.22.1
+Pkg.Path = cmake;3.22.1
+Pkg.Desc = CMake 3.22.1
+
+
+build-tools/36.0.0/source.properties
+Pkg.UserSrc=false
+Pkg.Revision=36.0.0
+#Pkg.Revision=36.0.0 rc5
+
+build-tools/35.0.0/source.properties
+Pkg.UserSrc=false
+Pkg.Revision=35.0.0
+#Pkg.Revision=35.0.0 rc4
+
+
+build-tools/37.0.0/source.properties
+Pkg.UserSrc=false
+Pkg.Revision=37.0.0
+
+
+platforms/android-37.0/source.properties
+Pkg.Desc=Android SDK Platform 17
+Pkg.UserSrc=false
+Platform.Version=17
+Platform.CodeName=
+Pkg.Revision=2
+AndroidVersion.ApiLevel=37.0
+AndroidVersion.CodeName=
+AndroidVersion.ExtensionLevel=22
+AndroidVersion.IsBaseSdk=true
+AndroidVersion.PreviewSdkInt=0
+AndroidVersion.BetaVersion=
+Layoutlib.Api=15
+Layoutlib.Revision=1
+Platform.MinToolsRev=22
+
+
+platforms/android-36/source.properties
+Pkg.Desc=Android SDK Platform 16
+Pkg.UserSrc=false
+Platform.Version=16
+Platform.CodeName=
+Pkg.Revision=2
+AndroidVersion.ApiLevel=36
+AndroidVersion.ExtensionLevel=17
+AndroidVersion.IsBaseSdk=true
+Layoutlib.Api=15
+Layoutlib.Revision=1
+Platform.MinToolsRev=22
+
+
+platforms/android-33/source.properties
+Pkg.Desc=Android SDK Platform 13
+Pkg.UserSrc=false
+Platform.Version=13
+Platform.CodeName=
+Pkg.Revision=3
+AndroidVersion.ApiLevel=33
+AndroidVersion.ExtensionLevel=3
+AndroidVersion.IsBaseSdk=true
+Layoutlib.Api=15
+Layoutlib.Revision=1
+Platform.MinToolsRev=22
+
+
+ndk/27.1.12297006/source.properties
+Pkg.Desc = Android NDK
+Pkg.Revision = 27.1.12297006
+Pkg.BaseRevision = 27.1.12297006
+Pkg.ReleaseName = r27b
+
+
+cmdline-tools/latest/source.properties
+Pkg.Revision=22.0
+Pkg.Path=cmdline-tools;22.0
+Pkg.Desc=Android SDK Command-line Tools

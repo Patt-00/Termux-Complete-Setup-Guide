@@ -1,0 +1,9 @@
+*.tar
+*.tar.gz
+*.tgz
+*.gguf
+*.apk
+*.dex
+*.keystore
+.env*
+private-backup/

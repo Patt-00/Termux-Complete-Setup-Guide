@@ -1,0 +1,8 @@
+# Android SDK environment (non-secret)
+export ANDROID_HOME=$HOME/android-sdk
+export ANDROID_SDK_ROOT=$HOME/android-sdk
+export PATH=$HOME/bin:$PATH:$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools
+export JAVA_OPTS="-Djava.net.preferIPv4Stack=true"
+
+# Browser IDE in Termux
+alias ide="$HOME/bin/ide"
