@@ -1,7 +1,14 @@
-deb https://mirror.nevacloud.com/applications/termux/termux-main stable main
+# sources.list
+deb https://packages-cf.termux.dev/apt/termux-main stable main
 
+# sources.list.d/glibc.list
+# The glibc termux repository, with cloudflare cache
 deb https://packages-cf.termux.dev/apt/termux-glibc/ glibc stable
+# The glibc termux repository, without cloudflare cache
+# deb https://packages.termux.dev/apt/termux-glibc/ glibc stable
 
-deb https://tur.kcubeterm.com tur-packages tur tur-on-device tur-continuous
+# sources.list.d/tur.list
+deb https://tur.kcubeterm.com tur-packages tur tur-on-device tur-nightly
 
-deb https://mirror.nevacloud.com/applications/termux/termux-x11 x11 main
+# sources.list.d/x11.list
+deb https://packages-cf.termux.dev/apt/termux-x11 x11 main

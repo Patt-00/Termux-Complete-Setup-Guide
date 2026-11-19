@@ -1,43 +1,55 @@
-# My complete Termux setup
+# Termux setup inventory
 
-Inventory and recreation guide for Patt-00's ARM64 Android development environment, captured **2026-10-11**. **446 installed Termux packages**, Python and npm packages, Debian/Fedora containers, Android SDK/NDK, desktop tools and local AI are documented.
+Current environment snapshot captured **2026-11-19**. It records the Android and Termux versions, all installed Termux packages, language package lists, SDK components, Linux containers, and the major available toolchains.
 
-## Read the guide
+## Read the documentation
 
-1. [Capabilities and usage](docs/capabilities.md)
-2. [Recreate this setup](docs/recreate.md)
-3. [Android and React Native APK builds](docs/react-native-apk.md)
-4. [Exact restoration through private backup](docs/private-backup.md)
-5. [Limits and troubleshooting](docs/limits.md)
+1. [Current environment inventory](docs/current-inventory.md)
+2. [Capabilities and installed tools](docs/capabilities.md)
+3. [Recreate the setup](docs/recreate.md)
+4. [React Native APK build notes](docs/react-native-apk.md)
+5. [Limits and privacy](docs/limits.md)
+6. [Private backup notes](docs/private-backup.md)
 
 ## Captured environment
 
 | Item | Observed value |
 | --- | --- |
-| Termux | 0.118.3, GitHub build; apt/debian packages |
-| Architecture | aarch64 / arm64-v8a; no Android 32-bit ABI reported |
-| Android / hardware | Android 16, Xiaomi 2410CRP4CG |
-| Kernel | Linux 6.1.138, Android 14 kernel branch |
-| Home | `/data/data/com.termux/files/home` |
-| Prefix | `/data/data/com.termux/files/usr` |
-| Repositories | main, X11, TUR, glibc |
-| Detected companion | Termux:X11 versionCode 15 |
-| Linux containers | Debian and Fedora |
-| SDK / model storage | approximately 3.1 GiB SDK and 9.2 GiB Ollama data |
+| Android device | Xiaomi 24129RT7CC, Android 16, arm64-v8a |
+| Kernel | Linux 6.6.118, Android 15 kernel build |
+| Termux | 0.118.3, GitHub release, apt/dpkg, aarch64 |
+| Installed Termux packages | 497, including dependencies |
+| PRoot containers | Debian 13.7 and Alpine 3.24.3 |
+| Android SDK | SDK Manager recognizes 6 packages; see inventory for exact IDs |
+| NDK | 27.1.12297006 plus a local Termux compatibility tree |
+| Main storage | 225 GB total, 30 GB available at capture time |
 
-Installed software establishes available building blocks; it does not prove every workflow currently works. This public repository is a documentation snapshot. An exact copy also requires privately preserved files, available package versions, model weights, projects, Android settings and your own account access.
+The inventory covers files visible to the Termux app and the shared-storage links it has. Android restricts access to other apps' private data. This snapshot does not claim to enumerate every Android app or the whole device.
 
-## Inventory and supporting files
+## Complete package records
 
-- [Every dpkg package/version/architecture/status](inventory/packages.tsv), including dependencies.
-- [Originally manual packages](inventory/manual-packages.txt).
-- [Python packages](inventory/python-packages.json) and [global npm packages](inventory/npm-global.json).
-- [Debian packages](inventory/debian-packages.tsv) and container OS release files.
-- [Repository URLs](inventory/repositories.txt), [SDK revisions](inventory/android-sdk.txt), [custom NDK symlinks](inventory/ndk-symlinks.txt).
-- Local skill/plugin names and selected non-secret Codex options in `inventory/`.
-- Reviewed `chrome` and `ide` launchers in `launchers/`, safe shell setup in `config/`.
-- `scripts/install-packages.sh`: install names or attempt exact versions.
+- [All 497 installed Termux packages](inventory/packages.tsv) and [389 APT manual-marked packages](inventory/manual-packages.txt).
+- [APT repositories](inventory/repositories.txt), [Python packages](inventory/python-packages.json), and [global npm packages](inventory/npm-global.json).
+- [Android SDK components](inventory/android-sdk.txt) and [custom NDK links](inventory/ndk-symlinks.txt).
+- [Debian packages](inventory/debian-packages.tsv), [Alpine packages](inventory/alpine-packages.txt), and each container's OS release file.
+- [Local skill names](inventory/skills.txt) and [cached plugin names](inventory/plugins.txt). A cache entry does not imply an account connection.
+- [Inventory counts](inventory/summary.txt) and [capture timestamp](inventory/captured-at.txt).
+
+Run `bash scripts/refresh-inventory.sh` in Termux to refresh these generated records. The script collects package metadata, repository URLs, SDK metadata, and container package lists. It does not copy credentials, project source, model weights, or logs.
+
+The exact local project names, top-level files, and private app-data areas are documented separately in `~/TERMUX-LOCAL-INVENTORY.md` on the device. That file is intentionally outside this repository. This repository does not contain project source, account credentials, SSH keys, server passwords, personal logs, or model weights.
+
+## Reinstalling packages
+
+Review [packages.tsv](inventory/packages.tsv) first. The helper script supports current repository versions or exact recorded versions:
+
+```sh
+bash scripts/install-packages.sh names
+bash scripts/install-packages.sh exact
+```
+
+APT will show the proposed transaction. Exact versions may no longer exist in configured repositories. Reinstalling packages does not restore Android settings, private configuration, container data, projects, local model weights, or account access.
 
 ## Sources
 
-Local device metadata is the primary source for the captured installation. Installation references: [Termux](https://github.com/termux/termux-app), [Termux:X11](https://github.com/termux/termux-x11), [Termux packages](https://github.com/termux/termux-packages), [glibc repository](https://github.com/termux/glibc-packages), [TUR](https://github.com/termux-user-repository/tur), [SDK Manager](https://developer.android.com/tools/sdkmanager), [Shizuku rish](https://github.com/RikkaApps/Shizuku-API/tree/master/rish), [community Termux Codex build](https://github.com/DioNanos/codex-termux).
+The local device metadata is the source for this snapshot. Upstream references: [Termux](https://github.com/termux/termux-app), [Termux:X11](https://github.com/termux/termux-x11), [Termux packages](https://github.com/termux/termux-packages), [glibc packages](https://github.com/termux/glibc-packages), [TUR](https://github.com/termux-user-repository/tur), and [Android SDK Manager](https://developer.android.com/tools/sdkmanager).

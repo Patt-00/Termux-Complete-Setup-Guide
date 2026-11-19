@@ -1,0 +1,7 @@
+Termux packages: 497
+Manual Termux packages: 389
+Python packages: 6
+Global npm package entries: 6
+Local skill directories: 14
+Named cached plugins: 13
+Installed PRoot containers: alpine debian

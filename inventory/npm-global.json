@@ -1,12 +1,28 @@
 {
   "name": "lib",
   "dependencies": {
-    "@mmmbuto/codex-cli-termux": {
-      "version": "0.160.0-termux.2",
+    "@letta-ai/letta-code": {
+      "version": "0.34.24",
+      "overridden": false
+    },
+    "@mmmbuto/codex-vl": {
+      "version": "0.166.0-vl.2",
+      "overridden": false
+    },
+    "@openai/codex-linux-arm64": {
+      "version": "0.155.1-linux-arm64",
       "overridden": false
     },
     "npm": {
-      "version": "11.19.1",
+      "version": "12.2.3",
+      "overridden": false
+    },
+    "omniroute": {
+      "version": "3.8.52",
+      "overridden": false
+    },
+    "typescript": {
+      "version": "5.9.3",
       "overridden": false
     }
   }

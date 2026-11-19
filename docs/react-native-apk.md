@@ -71,7 +71,7 @@ Example `android/local.properties`:
 ```properties
 sdk.dir=/data/data/com.termux/files/home/android-sdk
 cmake.dir=/data/data/com.termux/files/usr
-ndk.dir=/data/data/com.termux/files/home/termux-ndk
+ndk.dir=/data/data/com.termux/files/home/termux-ndk-27.1.12297006
 ```
 
 ## 4. Tell Gradle to use Termux AAPT2 and ARM64
