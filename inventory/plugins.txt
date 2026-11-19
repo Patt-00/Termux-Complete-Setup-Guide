@@ -1,14 +1,15 @@
-app-6948b604f2388191b8c2b99c44f583a1
-canva
-openai-templates
-github
-gmail
-google-calendar
-google-drive
-work-pets
-sites
-plugin-management
-cloud-environment
-figma
-app-69439d715a7c8191aed9e2f6649e105f
-app-69b479dd28188191b60241d6a4a534f2
+# Cached plugin names and versions; this does not imply an account connection.
+aihumanizer/1.0.0
+canva/17.0.1
+cloud-environment/0.2.1
+figma/20.0.0
+github/0.1.13-77c10e110b37
+gmail/0.1.10
+google-calendar/1.2.7
+google-drive/0.1.27
+openai-templates/0.1.1
+plugin-management/0.1.0
+sites/1.1.7
+visualize/1.0.89
+work-pets/0.1.6
+App-specific cached components: 5

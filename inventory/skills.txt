@@ -2,6 +2,7 @@ architecture-guardian
 code-reviewer
 dependency-upgrader
 feature-engineer
+hatch-pet
 performance-engineer
 react-native-android-engineer
 refactoring-engineer
